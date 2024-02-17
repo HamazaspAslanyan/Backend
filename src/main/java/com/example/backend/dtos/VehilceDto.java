@@ -1,7 +1,8 @@
 package com.example.backend.dtos;
 
 import lombok.*;
-import jakarta.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor

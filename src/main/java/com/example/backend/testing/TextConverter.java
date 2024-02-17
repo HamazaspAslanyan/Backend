@@ -18,6 +18,7 @@ public class TextConverter {
     private static final Map<String, String> ARMENIAN_TO_ENGLISH_MAP;
 
     static {
+        // lav ban
         ARMENIAN_TO_ENGLISH_MAP = new HashMap<>();
         ARMENIAN_TO_ENGLISH_MAP.put("ու", "u");
         ARMENIAN_TO_ENGLISH_MAP.put("ՈՒ", "U");

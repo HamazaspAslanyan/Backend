@@ -1,5 +1,6 @@
 package com.example.backend.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class Vehicle {
     @Column
     private String brand;
     @Column
-    private String mode;
+    private String model;
     @Column
     private String color;
     @Column
