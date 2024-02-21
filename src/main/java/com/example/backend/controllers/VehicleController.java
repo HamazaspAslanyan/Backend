@@ -2,11 +2,11 @@ package com.example.backend.controllers;
 
 import com.example.backend.services.VehicleService;
 import com.example.backend.dtos.VehilceDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 @RequiredArgsConstructor

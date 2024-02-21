@@ -1,14 +1,7 @@
 package com.example.backend.services;
 
-import com.example.backend.dtos.VehilceDto;
-import com.example.backend.entities.Vehicle;
-import com.example.backend.exceptions.AppException;
-import com.example.backend.mappers.VehicleMapper;
-import com.example.backend.repositories.VehicleRepository;
-import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TextConverter {
@@ -20,8 +13,11 @@ public class TextConverter {
 
         ARMENIAN_TO_ENGLISH_MAP.put("ու", "u");
         ARMENIAN_TO_ENGLISH_MAP.put("ՈՒ", "U");
+        ARMENIAN_TO_ENGLISH_MAP.put(" ո", " vo");
+        ARMENIAN_TO_ENGLISH_MAP.put(" Ո", " Vo");
         ARMENIAN_TO_ENGLISH_MAP.put("ԵՎ", "Yev");
         ARMENIAN_TO_ENGLISH_MAP.put("Եվ", "yev");
+        ARMENIAN_TO_ENGLISH_MAP.put("և", "yev");
         ARMENIAN_TO_ENGLISH_MAP.put("Ա", "A");
         ARMENIAN_TO_ENGLISH_MAP.put("ա", "a");
         ARMENIAN_TO_ENGLISH_MAP.put("Բ", "B");
@@ -36,6 +32,8 @@ public class TextConverter {
         ARMENIAN_TO_ENGLISH_MAP.put("զ", "z");
         ARMENIAN_TO_ENGLISH_MAP.put("Է", "e");
         ARMENIAN_TO_ENGLISH_MAP.put("է", "e");
+        ARMENIAN_TO_ENGLISH_MAP.put("Ը", "E");
+        ARMENIAN_TO_ENGLISH_MAP.put("ը", "e");
         ARMENIAN_TO_ENGLISH_MAP.put("Թ", "T");
         ARMENIAN_TO_ENGLISH_MAP.put("թ", "t");
         ARMENIAN_TO_ENGLISH_MAP.put("Ժ", "Zh");
