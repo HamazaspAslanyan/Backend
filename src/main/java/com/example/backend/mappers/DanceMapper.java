@@ -3,6 +3,7 @@ package com.example.backend.mappers;
 import com.example.backend.dtos.DanceDto;
 import com.example.backend.entities.Dance;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface DanceMapper {
 
     DanceDto toDanceDto(Dance dance);
 
+    @Mapping(target = "id", ignore = true)
     List<DanceDto> toDanceDtos(List<Dance> dances);
 
     void updateDance(@MappingTarget Dance target, Dance source);

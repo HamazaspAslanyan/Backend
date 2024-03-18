@@ -25,10 +25,10 @@ public class DanceController {
         return ResponseEntity.ok(danceService.getDance(id));
     }
 
-    @PostMapping("/dances")
+    @PostMapping("/dance")
     public ResponseEntity<DanceDto> createDance(@Valid @RequestBody DanceDto danceDto) {
         DanceDto createdDance = danceService.createDance(danceDto);
-        return ResponseEntity.created(URI.create("/dances/" + createdDance.getId())).body(createdDance);
+        return ResponseEntity.created(URI.create("/dance/" + createdDance.getId())).body(createdDance);
     }
 
     @DeleteMapping("/dances/{id}")

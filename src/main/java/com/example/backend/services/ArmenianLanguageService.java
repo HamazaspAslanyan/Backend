@@ -1,9 +1,11 @@
 package com.example.backend.services;
 
 import com.example.backend.entities.TelegramButton;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class ArmenianLanguageService {
 
 

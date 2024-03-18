@@ -13,7 +13,7 @@ public class TelegramFile {
     String path;
     String name; /* երգի անունը որպես ֆայլ */
 
-    String caption; // Տեքստ որպես նկարագրություն
+    String caption; // Տեքստ որպես նկարագրություն / Խմբի անուն
 
     String title; // Ինչ որ երևում ա որպես երգի անուն
 

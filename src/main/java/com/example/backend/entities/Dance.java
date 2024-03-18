@@ -1,6 +1,7 @@
 package com.example.backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -16,12 +17,8 @@ public class Dance {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @NotNull
     @Column
-    private String brand;
-    @Column
-    private String model;
-    @Column
-    private String color;
-    @Column
-    private int year;
+    private String name;
 }
