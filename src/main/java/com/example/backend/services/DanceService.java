@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -39,10 +40,11 @@ public class DanceService {
     }
 
 
-    public DanceDto getDance(Long id) {
+    public DanceDto getDance(UUID id) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-        return danceMapper.toDanceDto(dance);
+
+        return danceMapper.toDanceDto(dance, );
     }
 
     public DanceDto createDance(DanceDto danceDto) {
@@ -51,7 +53,7 @@ public class DanceService {
         return danceMapper.toDanceDto(createdDance);
     }
 
-    public DanceDto updateDance(Long id, DanceDto danceDto) {
+    public DanceDto updateDance(UUID id, DanceDto danceDto) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
@@ -62,7 +64,7 @@ public class DanceService {
         return danceMapper.toDanceDto(updatedDance);
     }
 
-    public DanceDto deleteDance(Long id) {
+    public DanceDto deleteDance(UUID id) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 

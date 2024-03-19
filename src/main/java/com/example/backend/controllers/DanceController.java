@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +22,7 @@ public class DanceController {
     }
 
     @GetMapping("/dance/{id}")
-    public ResponseEntity<DanceDto> getDance(@PathVariable Long id){
+    public ResponseEntity<DanceDto> getDance(@PathVariable UUID id){
         return ResponseEntity.ok(danceService.getDance(id));
     }
 
@@ -32,12 +33,12 @@ public class DanceController {
     }
 
     @DeleteMapping("/dances/{id}")
-    public ResponseEntity<DanceDto> deleteDance(@PathVariable Long id) {
+    public ResponseEntity<DanceDto> deleteDance(@PathVariable UUID id) {
         return ResponseEntity.ok(danceService.deleteDance(id));
     }
 
     @PutMapping("/dances/{id}")
-    public ResponseEntity<DanceDto> updateDance(@PathVariable Long id, @Valid @RequestBody DanceDto danceDto) {
+    public ResponseEntity<DanceDto> updateDance(@PathVariable UUID id, @Valid @RequestBody DanceDto danceDto) {
         return ResponseEntity.ok(danceService.updateDance(id, danceDto));
     }
 

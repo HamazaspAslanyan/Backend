@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
-@Table
+@Table(name = "dance")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,9 +18,10 @@ public class Dance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @Column(name = "id")
+    private UUID id;
 
-    @NotNull
-    @Column
+
     private String name;
+
 }
