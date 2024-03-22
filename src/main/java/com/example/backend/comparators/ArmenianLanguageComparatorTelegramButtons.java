@@ -1,6 +1,6 @@
 package com.example.backend.comparators;
 
-import com.example.backend.entities.TelegramButton;
+import com.example.backend.dtos.telegram.TelegramButton;
 
 import java.util.ArrayList;
 import java.util.Comparator;

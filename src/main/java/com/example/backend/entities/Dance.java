@@ -23,5 +23,6 @@ public class Dance {
 
 
     private String name;
+    private String description;
 
 }

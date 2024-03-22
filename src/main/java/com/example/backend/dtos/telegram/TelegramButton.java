@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+package com.example.backend.dtos.telegram;
 
 
 import com.example.backend.services.ArmenianLanguageService;

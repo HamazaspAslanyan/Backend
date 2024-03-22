@@ -1,6 +1,6 @@
 package com.example.backend.handlers;
 
-import com.example.backend.entities.TelegramButton;
+import com.example.backend.dtos.telegram.TelegramButton;
 import com.example.backend.services.DanceService;
 import com.example.backend.utils.TelegramUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class CommandsHandler {

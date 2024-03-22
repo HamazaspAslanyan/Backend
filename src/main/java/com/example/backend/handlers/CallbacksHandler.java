@@ -1,6 +1,6 @@
 package com.example.backend.handlers;
 
-import com.example.backend.entities.TelegramButton;
+import com.example.backend.dtos.telegram.TelegramButton;
 import com.example.backend.services.DanceService;
 import com.example.backend.services.TelegramBot;
 import com.example.backend.utils.TelegramUtil;

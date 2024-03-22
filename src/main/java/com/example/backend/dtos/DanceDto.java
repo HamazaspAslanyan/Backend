@@ -1,6 +1,6 @@
 package com.example.backend.dtos;
 
-import com.example.backend.entities.TelegramFile;
+import com.example.backend.dtos.telegram.TelegramFile;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

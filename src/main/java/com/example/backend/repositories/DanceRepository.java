@@ -13,6 +13,6 @@ public interface DanceRepository extends JpaRepository<Dance, UUID> {
     @Query(value = "SELECT * FROM dance", nativeQuery = true)
     List<Dance> getDances();
 
-    List<Dance> findDanceBy
+//    List<Dance> findDanceBy
 }
 

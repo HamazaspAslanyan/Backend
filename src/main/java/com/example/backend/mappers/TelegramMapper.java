@@ -2,8 +2,7 @@ package com.example.backend.mappers;
 
 import com.example.backend.comparators.ArmenianLanguageComparatorTelegramButtons;
 import com.example.backend.dtos.DanceDto;
-import com.example.backend.entities.Dance;
-import com.example.backend.entities.TelegramButton;
+import com.example.backend.dtos.telegram.TelegramButton;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
