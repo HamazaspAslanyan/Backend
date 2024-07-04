@@ -41,23 +41,23 @@ public class CallbacksHandler {
     }
 
     public SendMessage sendDance(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = danceService.getTelegramDanceList();
         return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendEvent(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = danceService.getTelegramDanceList();
         return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendLesson(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = danceService.getTelegramDanceList();
         return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendGroup(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = danceService.getTelegramDanceList();
         return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendSupport(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = danceService.getTelegramDanceList();
         return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
 }

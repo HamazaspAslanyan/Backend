@@ -27,8 +27,10 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Autowired
     public CallbacksHandler callbacksHandler;
+
     @Autowired
     public MessageHandler messageHandler;
+
     ArmenianLanguageService armenianLanguageService;
 
     public TelegramBot(BotConfig config) {

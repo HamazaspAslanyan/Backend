@@ -1,6 +1,7 @@
 package com.example.backend.handlers;
 
 import com.example.backend.dtos.telegram.TelegramButton;
+import com.example.backend.mappers.TelegramMapper;
 import com.example.backend.services.DanceService;
 import com.example.backend.utils.TelegramUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class CommandsHandler {
 
     @Autowired
     TelegramUtil telegramUtil;
+    @Autowired
+    private TelegramMapper telegramMapper;
 
 
     public SendMessage handleCommands(Update update) {
@@ -35,23 +38,27 @@ public class CommandsHandler {
     }
 
     public SendMessage sendDanceList(Update update) {
-        List<TelegramButton> buttons = danceService.getDanceList();
+        List<TelegramButton> buttons = telegramMapper.toDanceButtons(danceService.allDances());
         return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendEventsList(Update update) {
-        List<TelegramButton> buttons = danceService.getDanceList();
-        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+        return null;
+//        List<TelegramButton> buttons = danceService.getDanceList();
+//        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendClassesList(Update update) {
-        List<TelegramButton> buttons = danceService.getDanceList();
-        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+//        List<TelegramButton> buttons = danceService.getDanceList();
+//        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+        return null;
     }
     public SendMessage sendGroupsList(Update update) {
-        List<TelegramButton> buttons = danceService.getDanceList();
-        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+//        List<TelegramButton> buttons = danceService.getDanceList();
+//        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+        return null;
     }
     public SendMessage sendSupportList(Update update) {
-        List<TelegramButton> buttons = danceService.getDanceList();
-        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+//        List<TelegramButton> buttons = danceService.getDanceList();
+//        return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
+        return null;
     }
 }

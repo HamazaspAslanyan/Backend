@@ -1,9 +1,11 @@
 package com.example.backend.services;
 
-import com.example.backend.db.DB;
-import com.example.backend.dtos.DanceDto;
+import com.example.backend.dtos.DanceOptionDto;
+import com.example.backend.dtos.in.DanceInDto;
+import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.entities.Dance;
 import com.example.backend.dtos.telegram.TelegramButton;
+import com.example.backend.entities.Genre;
 import com.example.backend.exceptions.AppException;
 import com.example.backend.mappers.DanceMapper;
 import com.example.backend.mappers.TelegramMapper;
@@ -27,33 +29,49 @@ public class DanceService {
     @Autowired
     private final TelegramMapper telegramMapper;
 
-    private final DB db;
-
-    public List<DanceDto> allDances(){
-        List <Dance> all = danceRepository.getDances();
-        return danceMapper.toDanceDtos(all);
+    public List<DanceOutDto> allDances(){
+        List <Dance> all = danceRepository.findAll();
+        return danceMapper.toDanceOutDtoList(all);
     }
 
-    public List<TelegramButton> getDanceList() {
-        List<DanceDto> danceDtos = db.getDanceList();
-        return telegramMapper.toDanceButtons(danceDtos);
-    }
-
-
-    public DanceDto getDance(UUID id) {
+    public DanceOutDto getDance(UUID id) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
-        return danceMapper.toDanceDto(dance, new ArrayList<>());
+        return danceMapper.toDanceOutDto(dance);
     }
 
-    public DanceDto createDance(DanceDto danceDto) {
-        Dance dance = danceMapper.toDance(danceDto);
+    public DanceOutDto updateDance(UUID id, DanceInDto dto) {
+
+        return null;
+    }
+
+    public DanceOutDto createDance(DanceInDto dto) {
+
+        Dance createdDance = danceRepository.save(danceMapper.toDanceEntity(dto));
+        return danceMapper.toDanceOutDto(createdDance);
+    }
+
+    /** OPTIONS */
+    public List<DanceOptionDto> allOptions(){
+        List <Dance> all = danceRepository.findAll();
+        return danceMapper.toDanceOptionDtoList(all);
+    }
+
+    public DanceOptionDto getOption(UUID id) {
+        Dance dance = danceRepository.findById(id)
+                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
+
+        return danceMapper.toDanceOptionDto(dance, new ArrayList<>());
+    }
+
+    public DanceOptionDto createOption(DanceOptionDto danceOptionDto) {
+        Dance dance = danceMapper.toDanceEntity(danceOptionDto);
         Dance createdDance = danceRepository.save(dance);
-        return danceMapper.toDanceDto(createdDance, new ArrayList<>());
+        return danceMapper.toDanceOptionDto(createdDance, new ArrayList<>());
     }
 
-    public DanceDto updateDance(UUID id, DanceDto danceDto) {
+    public DanceOptionDto updateOption(UUID id, DanceOptionDto danceOptionDto) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
@@ -61,17 +79,25 @@ public class DanceService {
 
         Dance updatedDance = danceRepository.save(dance);
 
-        return danceMapper.toDanceDto(updatedDance, new ArrayList<>());
+        return danceMapper.toDanceOptionDto(updatedDance, new ArrayList<>());
     }
 
-    public DanceDto deleteDance(UUID id) {
+    public DanceOptionDto deleteOption(UUID id) {
         Dance dance = danceRepository.findById(id)
                 .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
         danceRepository.deleteById(id);
 
-        return  danceMapper.toDanceDto(dance, new ArrayList<>());
+        return  danceMapper.toDanceOptionDto(dance, new ArrayList<>());
 
+    }
+
+    /** TELEGRAM*/
+    public List<TelegramButton> getTelegramDanceList() {
+
+        List <Dance> all = danceRepository.findAll();
+        List<DanceOutDto> danceOutDtos =  danceMapper.toDanceOutDtoList(all);
+        return telegramMapper.toDanceButtons(danceOutDtos);
     }
 }
 

@@ -1,7 +1,8 @@
 package com.example.backend.mappers;
 
 import com.example.backend.comparators.ArmenianLanguageComparatorTelegramButtons;
-import com.example.backend.dtos.DanceDto;
+import com.example.backend.dtos.DanceOptionDto;
+import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.dtos.telegram.TelegramButton;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +12,38 @@ import java.util.List;
 @Component
 public class TelegramMapper {
 
-    public List<TelegramButton> toDanceButtons(List<DanceDto> dances){
+//    public List<TelegramButton> toDanceButtons(List<DanceOptionDto> dances){
+//
+//        List<TelegramButton> buttons = new ArrayList<>();
+//
+//        for (DanceOptionDto dance : dances){
+//            String text = dance.getName();
+////            if(dance.getDescription() != null){
+////                text += "\uD83D\uDCC4";
+////            }
+////            if(dance.getMusicList() != null){
+////                text += "\uD83C\uDFA7";
+////            }
+//            String callBack = "dance_" + dance.getId();
+//            buttons.add(new TelegramButton(text, callBack));
+//        }
+//
+//        buttons.sort(new ArmenianLanguageComparatorTelegramButtons<>());
+//
+//        return buttons;
+//    }
+    public List<TelegramButton> toDanceButtons(List<DanceOutDto> dances){
 
         List<TelegramButton> buttons = new ArrayList<>();
 
-        for (DanceDto dance : dances){
+        for (DanceOutDto dance : dances){
             String text = dance.getName();
-            if(dance.getDescription() != null){
-                text += "\uD83D\uDCC4";
-            }
-            if(dance.getMusicList() != null){
-                text += "\uD83C\uDFA7";
-            }
+//            if(dance.getDescription() != null){
+//                text += "\uD83D\uDCC4";
+//            }
+//            if(dance.getMusicList() != null){
+//                text += "\uD83C\uDFA7";
+//            }
             String callBack = "dance_" + dance.getId();
             buttons.add(new TelegramButton(text, callBack));
         }
@@ -31,4 +52,25 @@ public class TelegramMapper {
 
         return buttons;
     }
+
+//    public List<TelegramButton> toDanceButtons(List<DanceDto> dances){
+//
+//        List<TelegramButton> buttons = new ArrayList<>();
+//
+//        for (DanceDto dance : dances){
+//            String text = dance.getName();
+//            if(dance.getDescription() != null){
+//                text += "\uD83D\uDCC4";
+//            }
+//            if(dance.getMusicList() != null){
+//                text += "\uD83C\uDFA7";
+//            }
+//            String callBack = "dance_" + dance.getId();
+//            buttons.add(new TelegramButton(text, callBack));
+//        }
+//
+//        buttons.sort(new ArmenianLanguageComparatorTelegramButtons<>());
+//
+//        return buttons;
+//    }
 }

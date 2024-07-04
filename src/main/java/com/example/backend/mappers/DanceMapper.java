@@ -1,11 +1,11 @@
 package com.example.backend.mappers;
 
-import com.example.backend.dtos.DanceDto;
+import com.example.backend.dtos.DanceOptionDto;
+import com.example.backend.dtos.in.DanceInDto;
+import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.entities.Dance;
 import com.example.backend.dtos.telegram.TelegramFile;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,26 +13,60 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public class DanceMapper {
 
-    public Dance toDance(DanceDto danceDto){
+    public Dance toDanceEntity(DanceOptionDto danceOptionDto){
         return Dance.builder()
-                .name(danceDto.getName())
+                .name(danceOptionDto.getName())
                 .build();
     }
 
-    public DanceDto toDanceDto(Dance dance, List<TelegramFile> musics){
-        return DanceDto.builder()
-                .description("mama")
-                .musicList(musics)
+
+    public Dance toDanceEntity(DanceInDto danceInDto){
+        return Dance.builder()
+                .name(danceInDto.getName())
+//                (danceInDto.getDescription()))
                 .build();
     }
 
-    public List<DanceDto> toDanceDtos(List<Dance> all) {
-        return new ArrayList<>();
+
+    public DanceOutDto toDanceOutDto(Dance dance) {
+        return DanceOutDto.builder()
+                .id(dance.getId())
+                .name(dance.getName())
+                .genres(dance.getGenre_list())
+                .states(dance.getState_list())
+                .build();
     }
 
-//    @Mapping(target = "id", ignore = true)
-//    List<DanceDto> toDanceDtos(List<Dance> dances);
+    public List<DanceOutDto> toDanceOutDtoList(List<Dance> all) {
+        List<DanceOutDto> danceOutDtoList = new ArrayList<>();
+        for(Dance danceEntity : all) {
+            danceOutDtoList.add(DanceOutDto.builder()
+                    .id(danceEntity.getId())
+                    .name(danceEntity.getName())
+                    .genres(danceEntity.getGenre_list())
+                    .states(danceEntity.getState_list())
+                    .build());
+        }
+        return danceOutDtoList;
+    }
 
-//    void updateDance(@MappingTarget Dance target, Dance source);
+    /** OPTION */
+    public DanceOptionDto toDanceOptionDto(Dance dance, List<TelegramFile> musics){
+        return DanceOptionDto.builder()
+                .id(dance.getId())
+                .name(dance.getName())
+                .build();
+    }
+
+    public List<DanceOptionDto> toDanceOptionDtoList(List<Dance> all) {
+        List<DanceOptionDto> danceOptionDtoList = new ArrayList<>();
+        for(Dance danceEntity : all) {
+            danceOptionDtoList.add(DanceOptionDto.builder()
+                    .id(danceEntity.getId())
+                    .name(danceEntity.getName())
+                    .build());
+        }
+        return danceOptionDtoList;
+    }
 }
 
