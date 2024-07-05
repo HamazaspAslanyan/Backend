@@ -1,6 +1,8 @@
 package com.example.backend.handlers;
 
-import com.example.backend.dtos.telegram.TelegramButton;
+import com.example.backend.dtos.out.DanceOutDto;
+import com.example.backend.entities.Music;
+import com.example.backend.mappers.TelegramMapper;
 import com.example.backend.services.DanceService;
 import com.example.backend.bots.TelegramBot;
 import com.example.backend.utils.TelegramUtil;
@@ -9,7 +11,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Component
 public class CallbacksHandler {
@@ -18,6 +21,8 @@ public class CallbacksHandler {
     TelegramUtil telegramUtil;
     @Autowired
     DanceService danceService;
+    @Autowired
+    TelegramMapper telegramMapper;
 
 
     TelegramBot telegramBot;
@@ -26,7 +31,7 @@ public class CallbacksHandler {
 
         String[] callBackData = update.getCallbackQuery().getData().split("_");
         String command = callBackData[0];
-        String itemId = callBackData[callBackData.length - 1];
+        UUID itemId = UUID.fromString(callBackData[callBackData.length - 1]);
 
         long chatId = update.getCallbackQuery().getMessage().getChatId();
 
@@ -40,25 +45,31 @@ public class CallbacksHandler {
         }
     }
 
-    public SendMessage sendDance(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getTelegramDanceList();
-        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
+    public SendMessage sendDance(Update update, UUID danceid) {
+        Long chatId = update.getCallbackQuery().getMessage().getChatId();
+        DanceOutDto danceOutDto = danceService.getDance(danceid);
+        Set<Music> musicList = danceOutDto.getMusicList();
+        return (SendMessage) telegramUtil.getAudioList(chatId, telegramMapper.musicToFileList(musicList),danceOutDto.getName());
     }
-    public SendMessage sendEvent(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getTelegramDanceList();
-        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
+    public SendMessage sendEvent(Update update, UUID danceid) {
+        return null;
+//        List<TelegramButton> buttons = danceService.getTelegramDanceList();
+//        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
-    public SendMessage sendLesson(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getTelegramDanceList();
-        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
+    public SendMessage sendLesson(Update update, UUID danceid) {
+        return null;
+//        List<TelegramButton> buttons = danceService.getTelegramDanceList();
+//        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
-    public SendMessage sendGroup(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getTelegramDanceList();
-        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
+    public SendMessage sendGroup(Update update, UUID danceid) {
+        return null;
+//        List<TelegramButton> buttons = danceService.getTelegramDanceList();
+//        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
-    public SendMessage sendSupport(Update update, String danceid) {
-        List<TelegramButton> buttons = danceService.getTelegramDanceList();
-        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
+    public SendMessage sendSupport(Update update, UUID danceid) {
+        return null;
+//        List<TelegramButton> buttons = danceService.getTelegramDanceList();
+//        return telegramUtil.getButtons(update.getCallbackQuery().getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
 }
 

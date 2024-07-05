@@ -3,10 +3,15 @@ package com.example.backend.mappers;
 import com.example.backend.comparators.ArmenianLanguageComparatorTelegramButtons;
 import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.dtos.telegram.TelegramButton;
+import com.example.backend.dtos.telegram.TelegramFile;
+import com.example.backend.entities.Music;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class TelegramMapper {
@@ -50,6 +55,27 @@ public class TelegramMapper {
         buttons.sort(new ArmenianLanguageComparatorTelegramButtons<>());
 
         return buttons;
+    }
+
+    public List<TelegramFile> musicToFileList(Set<Music> musicList){
+        List<TelegramFile> telegramFileList = new ArrayList<>();
+        String fullPath = "c:/Users/Aslanyan/Desktop/kuku.mp3";
+
+
+
+        if (musicList != null && !musicList.isEmpty()){
+            for(Music music : musicList) {
+                TelegramFile file = new TelegramFile();
+                file.setName("kuku");
+//                file.setName(music.getName());
+                file.setTitle("kuku");
+                file.setPath(fullPath);
+                file.setTitle("kuku");
+                file.setCaption("kuku");
+                telegramFileList.add(file);
+            }
+        }
+        return telegramFileList;
     }
 
 //    public List<TelegramButton> toDanceButtons(List<DanceDto> dances){

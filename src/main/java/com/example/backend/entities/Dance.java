@@ -74,6 +74,7 @@ public class Dance {
         return Objects.hash(id);
     }
 
+
     @Override
     public String toString() {
         return "Dance{" +
@@ -81,6 +82,8 @@ public class Dance {
                 ", name='" + name + '\'' +
                 // Avoid recursive call to Genre's toString
                 ", genres=" + (genre_list != null ? genre_list.stream().map(genre -> genre.getId()).collect(Collectors.toSet()) : null) +
+                // Avoid recursive call to Genre's toString
+                ", music_list=" + (music_list != null ? music_list.stream().map(music -> music.getId()).collect(Collectors.toSet()) : null) +
                 '}';
     }
 

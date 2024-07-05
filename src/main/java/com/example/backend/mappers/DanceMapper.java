@@ -32,8 +32,9 @@ public class DanceMapper {
         return DanceOutDto.builder()
                 .id(dance.getId())
                 .name(dance.getName())
-                .genres(dance.getGenre_list())
-                .states(dance.getState_list())
+                .genreList(dance.getGenre_list())
+                .stateList(dance.getState_list())
+                .musicList(dance.getMusic_list())
                 .build();
     }
 
@@ -43,8 +44,9 @@ public class DanceMapper {
             danceOutDtoList.add(DanceOutDto.builder()
                     .id(danceEntity.getId())
                     .name(danceEntity.getName())
-                    .genres(danceEntity.getGenre_list())
-                    .states(danceEntity.getState_list())
+                    .genreList(danceEntity.getGenre_list())
+                    .stateList(danceEntity.getState_list())
+                    .musicList(danceEntity.getMusic_list())
                     .build());
         }
         return danceOutDtoList;

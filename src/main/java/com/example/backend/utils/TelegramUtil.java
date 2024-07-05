@@ -24,8 +24,9 @@ public class TelegramUtil {
 
     SendAudio getAudio(long chatId, String Header, TelegramFile audio){
 
-        URL url = getClass().getClassLoader().getResource(audio.getPath());
-        File audioFile = new File(url.getFile());
+//        URL url = getClass().getClassLoader().getResource(audio.getPath());
+//        File audioFile = new File(url.getFile());
+        File audioFile = new File(audio.getPath());
         InputFile inputFile = new InputFile(audioFile, audio.getName());
 
         SendAudio sendAudio = new SendAudio();
