@@ -13,29 +13,26 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public class DanceMapper {
 
-    public Dance toDanceEntity(DanceOptionDto danceOptionDto){
-        return Dance.builder()
-                .name(danceOptionDto.getName())
-                .build();
-    }
 
 
-    public Dance toDanceEntity(DanceInDto danceInDto){
-        return Dance.builder()
-                .name(danceInDto.getName())
-//                (danceInDto.getDescription()))
-                .build();
-    }
-
-
-    public DanceOutDto toDanceOutDto(Dance dance) {
-        return DanceOutDto.builder()
+    public DanceOutDto toDanceOutDto(Dance dance, String languageCode) {
+        DanceOutDto outDto = DanceOutDto.builder()
                 .id(dance.getId())
-                .name(dance.getName())
                 .genreList(dance.getGenre_list())
                 .stateList(dance.getState_list())
                 .musicList(dance.getMusic_list())
                 .build();
+
+        // Set the appropriate translation based on the language code
+        dance.getTranslations().stream()
+                .filter(translation -> translation.getLanguageCode().equals(languageCode))
+                .findFirst()
+                .ifPresent(translation -> {
+                    outDto.setName(translation.getName());
+                    outDto.setDescription(translation.getDescription());
+                });
+
+        return outDto;
     }
 
     public List<DanceOutDto> toDanceOutDtoList(List<Dance> all) {

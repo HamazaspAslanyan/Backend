@@ -32,6 +32,10 @@ public class Music {
     @JsonBackReference
     private Set<Dance> dances;
 
+    @ManyToMany(mappedBy = "music_list", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Ensemble> ensembles;
+
 
     @Override
     public boolean equals(Object o) {

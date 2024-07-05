@@ -22,16 +22,16 @@ import java.util.List;
 @Component
 public class TelegramUtil {
 
-    SendAudio getAudio(long chatId, String Header, TelegramFile audio){
+    public SendAudio getAudio(long chatId, String Header, TelegramFile audio){
 
-//        URL url = getClass().getClassLoader().getResource(audio.getPath());
-//        File audioFile = new File(url.getFile());
         File audioFile = new File(audio.getPath());
         InputFile inputFile = new InputFile(audioFile, audio.getName());
 
         SendAudio sendAudio = new SendAudio();
         sendAudio.setChatId(String.valueOf(chatId));
         sendAudio.setCaption(Header);
+        // Կնոպկի հետևն երևացող նկար
+        sendAudio.setThumbnail(new InputFile(new File("C:\\Users\\Aslanyan\\Desktop\\photo_2024-06-25_17-48-17.jpg")));
         sendAudio.setAudio(inputFile);
         sendAudio.setCaption(audio.getCaption());
         sendAudio.setTitle(audio.getTitle());
@@ -56,7 +56,7 @@ public class TelegramUtil {
     }
 
 
-    SendMediaGroup getMediaGroup(long chatId, List<TelegramFile> audioList){
+    public SendMediaGroup getMediaGroup(long chatId, List<TelegramFile> audioList){
 
         List<InputMedia> mediaList = new ArrayList<>();
         InputMediaAudio inputMediaAudio = new InputMediaAudio();
@@ -117,15 +117,4 @@ public class TelegramUtil {
         markupInline.setKeyboard(rowList);
         return markupInline;
     }
-
-    public Validable getAudioList(Long chatId, List<TelegramFile> audioList, String header){
-
-        if (audioList.size() > 1) {
-            return this.getMediaGroup(chatId, audioList);
-        }else if (!audioList.isEmpty()){
-            return this.getAudio(chatId, header, audioList.get(0));
-        }
-        return null;
-    }
-
 }

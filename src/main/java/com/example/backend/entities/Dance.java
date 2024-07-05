@@ -26,8 +26,6 @@ public class Dance {
     @Column(name = "id")
     private UUID id;
 
-    private String name;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "DANCE_GENRE",
             joinColumns = {
@@ -61,6 +59,10 @@ public class Dance {
     @JsonManagedReference
     private Set<Music> music_list;
 
+
+    @OneToMany(mappedBy = "dance", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DanceTranslation> translations;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,15 +77,14 @@ public class Dance {
     }
 
 
+
     @Override
     public String toString() {
         return "Dance{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                // Avoid recursive call to Genre's toString
-                ", genres=" + (genre_list != null ? genre_list.stream().map(genre -> genre.getId()).collect(Collectors.toSet()) : null) +
-                // Avoid recursive call to Genre's toString
-                ", music_list=" + (music_list != null ? music_list.stream().map(music -> music.getId()).collect(Collectors.toSet()) : null) +
+                ", genre_list=" + (genre_list != null ? genre_list.stream().map(Genre::getId).collect(Collectors.toSet()) : null) +
+                ", state_list=" + (state_list != null ? state_list.stream().map(State::getId).collect(Collectors.toSet()) : null) +
+                ", music_list=" + (music_list != null ? music_list.stream().map(Music::getId).collect(Collectors.toSet()) : null) +
                 '}';
     }
 

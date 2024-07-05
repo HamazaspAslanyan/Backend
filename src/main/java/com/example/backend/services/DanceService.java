@@ -49,6 +49,18 @@ public class DanceService {
     }
 
 
+    public List<DanceOutDto> searchDance(String danceName) {
+        try {
+            List <Dance> all = danceRepository.searchByName(danceName);
+
+            return danceMapper.toDanceOutDtoList(all);
+        }catch (Exception e){
+             return null;
+        }
+
+    }
+
+
     public DanceOutDto updateDance(UUID id, DanceInDto dto) {
 
         Dance optionalDance  = danceRepository.findById(id)
@@ -73,7 +85,7 @@ public class DanceService {
         return danceMapper.toDanceOutDto(danceRepository.save(optionalDance));
     }
 
-    public DanceOutDto createDance(DanceInDto dto) {
+    public DanceOutDto createDance(DanceInDto dto, String languageCode) {
 
         Dance dance = Dance.builder()
                 .name(dto.getName())
@@ -113,32 +125,7 @@ public class DanceService {
         return danceMapper.toDanceOptionDto(dance, new ArrayList<>());
     }
 
-    public DanceOptionDto createOption(DanceOptionDto danceOptionDto) {
-        Dance dance = danceMapper.toDanceEntity(danceOptionDto);
-        Dance createdDance = danceRepository.save(dance);
-        return danceMapper.toDanceOptionDto(createdDance, new ArrayList<>());
-    }
 
-    public DanceOptionDto updateOption(UUID id, DanceOptionDto danceOptionDto) {
-        Dance dance = danceRepository.findById(id)
-                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-
-//        danceMapper.updateDance(dance, danceMapper.toDance(danceDto));
-
-        Dance updatedDance = danceRepository.save(dance);
-
-        return danceMapper.toDanceOptionDto(updatedDance, new ArrayList<>());
-    }
-
-    public DanceOptionDto deleteOption(UUID id) {
-        Dance dance = danceRepository.findById(id)
-                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-
-        danceRepository.deleteById(id);
-
-        return  danceMapper.toDanceOptionDto(dance, new ArrayList<>());
-
-    }
 
     /** TELEGRAM */
     public List<TelegramButton> getTelegramDanceList() {

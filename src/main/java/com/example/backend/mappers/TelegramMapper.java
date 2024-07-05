@@ -59,19 +59,21 @@ public class TelegramMapper {
 
     public List<TelegramFile> musicToFileList(Set<Music> musicList){
         List<TelegramFile> telegramFileList = new ArrayList<>();
-        String fullPath = "c:/Users/Aslanyan/Desktop/kuku.mp3";
+        String fullPath = "C:\\Users\\Aslanyan\\Desktop\\Թամզարա - «Սասնա ծռեր համույթ» - Tamzara (Sasna Crer Folk Group).mp3";
 
 
 
         if (musicList != null && !musicList.isEmpty()){
             for(Music music : musicList) {
                 TelegramFile file = new TelegramFile();
-                file.setName("kuku");
-//                file.setName(music.getName());
-                file.setTitle("kuku");
+                // Քաշելուց հետո երգի անուն
+                file.setName(music.getName());
+                file.setTitle("mama");
                 file.setPath(fullPath);
-                file.setTitle("kuku");
-                file.setCaption("kuku");
+                //Երգի կողքին երևացող անուն
+                file.setTitle("papa");
+                // Նկարագրություն
+                file.setCaption("pipi");
                 telegramFileList.add(file);
             }
         }

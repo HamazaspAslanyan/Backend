@@ -21,5 +21,7 @@ public interface DanceRepository extends JpaRepository<Dance, UUID> {
     Optional<Dance> findById(@Param("id") UUID id);
 
 
+    @Query(value = "SELECT * FROM Dance WHERE similarity(Dance.name, :name) > 0.3 ORDER BY similarity(Dance.name, :name) DESC", nativeQuery = true)
+    List<Dance> searchByName(@Param("name") String name);
 }
 

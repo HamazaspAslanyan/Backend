@@ -7,7 +7,6 @@ import java.util.*;
 @Component
 public class ArmenianLanguageService {
 
-
     private final Map<String, String> ARMENIAN_TO_ENGLISH_MAP;
 
     {

@@ -21,6 +21,7 @@ public class DanceOutDto {
     @Id
     private UUID id;
     private String name;
+    private String description;
 
     private Set<State> stateList;
     private Set<Genre> genreList;
