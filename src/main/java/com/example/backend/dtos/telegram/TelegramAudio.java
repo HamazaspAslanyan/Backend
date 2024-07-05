@@ -10,11 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TelegramAudio {
+
     String path;
     String name; /* երգի անունը որպես ֆայլ */
-
     String caption; // Տեքստ որպես նկարագրություն
-
     String title; // Ինչ որ երևում ա որպես երգի անուն
 
 }

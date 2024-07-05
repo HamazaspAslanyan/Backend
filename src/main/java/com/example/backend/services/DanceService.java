@@ -1,6 +1,6 @@
 package com.example.backend.services;
 
-import com.example.backend.dtos.DanceOptionDto;
+import com.example.backend.dtos.options.DanceOptionDto;
 import com.example.backend.dtos.in.DanceInDto;
 import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.entities.Dance;
@@ -32,7 +32,6 @@ public class DanceService {
     private final GenreOptionRepository genreOptionRepository;
     @Autowired
     private final DanceMapper danceMapper;
-
     @Autowired
     private final TelegramMapper telegramMapper;
 
@@ -42,33 +41,11 @@ public class DanceService {
     }
 
     public DanceOutDto getDance(UUID id) {
-//
-//    Optional<Dance> listik = danceRepository.findById(id);
-        try {
 
-//            List<Object[]> result = danceRepository.findByIdWithGenresAndStates(id);
-//                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-//            Dance dance = danceRepository.findByIdWithGenresAndStates(id)
-//                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-
-            Dance dance = danceRepository.findById(id)
-                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
-
-//            Dance dance = null;
-                    System.out.println("Fetched Dance: " + dance);
-            System.out.println("Genres: " + dance.getGenre_list());
-            System.out.println("States: " + dance.getState_list());
+        Dance dance = danceRepository.findById(id)
+                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
             return danceMapper.toDanceOutDto(dance);
-        } catch (Exception e){
-            System.out.println(e.getMessage() + "");
-            e.printStackTrace();
-            System.out.println(e + "");
-
-        }
-
-
-        return null;
     }
 
 
@@ -98,23 +75,27 @@ public class DanceService {
 
     public DanceOutDto createDance(DanceInDto dto) {
 
-        // Fetch genres
-        Set<Genre> genres = new HashSet<>();
+        Dance dance = Dance.builder()
+                .name(dto.getName())
+                .build();
+
+        if (dto.getGenreList() != null && !dto.getGenreList().isEmpty()){
+
+            Set<Genre> genres = new HashSet<>();
         for (UUID genreId : dto.getGenreList()) {
             genreOptionRepository.findById(genreId).ifPresent(genres::add);
         }
-
-        // Fetch states
-        Set<State> states = new HashSet<>();
-        for (UUID stateId : dto.getStateList()) {
-            stateOptionRepository.findById(stateId).ifPresent(states::add);
+        dance.setGenre_list(genres);
         }
 
-        Dance dance = Dance.builder()
-                        .name(dto.getName())
-                        .genre_list(genres)
-                        .state_list(states)
-                        .build();
+        if (dto.getStateList() != null && !dto.getStateList().isEmpty()){
+
+            Set<State> states = new HashSet<>();
+            for (UUID stateId : dto.getStateList()) {
+                stateOptionRepository.findById(stateId).ifPresent(states::add);
+            }
+            dance.setState_list(states);
+        }
 
         return danceMapper.toDanceOutDto(danceRepository.save(dance));
     }
@@ -159,7 +140,7 @@ public class DanceService {
 
     }
 
-    /** TELEGRAM*/
+    /** TELEGRAM */
     public List<TelegramButton> getTelegramDanceList() {
 
         List <Dance> all = danceRepository.findAll();

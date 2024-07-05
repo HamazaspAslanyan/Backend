@@ -1,9 +1,10 @@
-package com.example.backend.services;
+package com.example.backend.bots;
 
 import com.example.backend.config.BotConfig;
 import com.example.backend.handlers.CallbacksHandler;
 import com.example.backend.handlers.CommandsHandler;
 import com.example.backend.handlers.MessageHandler;
+import com.example.backend.services.ArmenianLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -14,8 +15,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.*;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {

@@ -1,4 +1,4 @@
-package com.example.backend.services;
+package com.example.backend.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import com.mpatric.mp3agic.*;
 
-public class MusicService {
+public class MusicUtil {
 
     public void changeFileCover(String mp3FilePath, String coverPhotoPath){
         try {

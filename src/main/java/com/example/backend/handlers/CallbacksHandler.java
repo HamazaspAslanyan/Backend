@@ -2,7 +2,7 @@ package com.example.backend.handlers;
 
 import com.example.backend.dtos.telegram.TelegramButton;
 import com.example.backend.services.DanceService;
-import com.example.backend.services.TelegramBot;
+import com.example.backend.bots.TelegramBot;
 import com.example.backend.utils.TelegramUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.example.backend.mappers;
 
-import com.example.backend.dtos.GenreOptionDto;
+import com.example.backend.dtos.options.GenreOptionDto;
 import com.example.backend.entities.Genre;
 import org.mapstruct.Mapper;
 

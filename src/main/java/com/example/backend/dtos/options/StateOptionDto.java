@@ -1,4 +1,4 @@
-package com.example.backend.dtos;
+package com.example.backend.dtos.options;
 
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @Getter
 @Setter
-public class GenreOptionDto {
+public class StateOptionDto {
     @Id
     private UUID id;
     @NotNull

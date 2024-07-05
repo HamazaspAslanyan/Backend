@@ -1,8 +1,8 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dtos.DanceOptionDto;
-import com.example.backend.dtos.GenreOptionDto;
-import com.example.backend.dtos.StateOptionDto;
+import com.example.backend.dtos.options.DanceOptionDto;
+import com.example.backend.dtos.options.GenreOptionDto;
+import com.example.backend.dtos.options.StateOptionDto;
 import com.example.backend.services.DanceService;
 import com.example.backend.services.GenreOptionService;
 import com.example.backend.services.StateOptionService;
@@ -23,7 +23,7 @@ public class OptionsController {
     private final GenreOptionService genreOptionService;
     private final StateOptionService stateOptionService;
 
-    @GetMapping("/dancesik")
+    @GetMapping("/dances_options")
     public ResponseEntity<List<DanceOptionDto>> allDanceOptions(){
         return ResponseEntity.ok(danceService.allOptions());
     }

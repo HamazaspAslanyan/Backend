@@ -1,6 +1,6 @@
 package com.example.backend.mappers;
 
-import com.example.backend.dtos.DanceOptionDto;
+import com.example.backend.dtos.options.DanceOptionDto;
 import com.example.backend.dtos.in.DanceInDto;
 import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.entities.Dance;

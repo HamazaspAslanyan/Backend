@@ -1,6 +1,6 @@
 package com.example.backend.services;
 
-import com.example.backend.dtos.StateOptionDto;
+import com.example.backend.dtos.options.StateOptionDto;
 import com.example.backend.entities.State;
 import com.example.backend.exceptions.AppException;
 import com.example.backend.mappers.StateOptionMapper;

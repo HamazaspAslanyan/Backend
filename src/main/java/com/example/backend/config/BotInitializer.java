@@ -1,6 +1,6 @@
 package com.example.backend.config;
 
-import com.example.backend.services.TelegramBot;
+import com.example.backend.bots.TelegramBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

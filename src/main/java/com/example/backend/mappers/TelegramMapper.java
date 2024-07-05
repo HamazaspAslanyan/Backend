@@ -1,7 +1,6 @@
 package com.example.backend.mappers;
 
 import com.example.backend.comparators.ArmenianLanguageComparatorTelegramButtons;
-import com.example.backend.dtos.DanceOptionDto;
 import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.dtos.telegram.TelegramButton;
 import org.springframework.stereotype.Component;

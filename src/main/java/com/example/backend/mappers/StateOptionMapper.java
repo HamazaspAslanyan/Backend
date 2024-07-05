@@ -1,6 +1,6 @@
 package com.example.backend.mappers;
 
-import com.example.backend.dtos.StateOptionDto;
+import com.example.backend.dtos.options.StateOptionDto;
 import com.example.backend.entities.State;
 import org.mapstruct.Mapper;
 

@@ -1,13 +1,11 @@
 package com.example.backend.services;
 
-import com.example.backend.dtos.GenreOptionDto;
+import com.example.backend.dtos.options.GenreOptionDto;
 import com.example.backend.entities.Genre;
 import com.example.backend.exceptions.AppException;
 import com.example.backend.mappers.GenreOptionMapper;
-import com.example.backend.mappers.TelegramMapper;
 import com.example.backend.repositories.GenreOptionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
