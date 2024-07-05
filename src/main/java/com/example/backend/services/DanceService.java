@@ -6,24 +6,31 @@ import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.entities.Dance;
 import com.example.backend.dtos.telegram.TelegramButton;
 import com.example.backend.entities.Genre;
+import com.example.backend.entities.State;
 import com.example.backend.exceptions.AppException;
 import com.example.backend.mappers.DanceMapper;
 import com.example.backend.mappers.TelegramMapper;
 import com.example.backend.repositories.DanceRepository;
+import com.example.backend.repositories.GenreOptionRepository;
+import com.example.backend.repositories.StateOptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class DanceService {
 
+    @Autowired
     private final DanceRepository danceRepository;
+    @Autowired
+    private final StateOptionRepository stateOptionRepository;
+    @Autowired
+    private final GenreOptionRepository genreOptionRepository;
+    @Autowired
     private final DanceMapper danceMapper;
 
     @Autowired
@@ -35,21 +42,81 @@ public class DanceService {
     }
 
     public DanceOutDto getDance(UUID id) {
-        Dance dance = danceRepository.findById(id)
-                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
+//
+//    Optional<Dance> listik = danceRepository.findById(id);
+        try {
 
-        return danceMapper.toDanceOutDto(dance);
-    }
+//            List<Object[]> result = danceRepository.findByIdWithGenresAndStates(id);
+//                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
+//            Dance dance = danceRepository.findByIdWithGenresAndStates(id)
+//                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
 
-    public DanceOutDto updateDance(UUID id, DanceInDto dto) {
+            Dance dance = danceRepository.findById(id)
+                    .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
+
+//            Dance dance = null;
+                    System.out.println("Fetched Dance: " + dance);
+            System.out.println("Genres: " + dance.getGenre_list());
+            System.out.println("States: " + dance.getState_list());
+
+            return danceMapper.toDanceOutDto(dance);
+        } catch (Exception e){
+            System.out.println(e.getMessage() + "");
+            e.printStackTrace();
+            System.out.println(e + "");
+
+        }
+
 
         return null;
     }
 
+
+    public DanceOutDto updateDance(UUID id, DanceInDto dto) {
+
+        Dance optionalDance  = danceRepository.findById(id)
+                .orElseThrow(() -> new AppException("Dance not found", HttpStatus.NOT_FOUND));
+
+        // Fetch genres
+        Set<Genre> genres = new HashSet<>();
+        for (UUID genreId : dto.getGenreList()) {
+            genreOptionRepository.findById(genreId).ifPresent(genres::add);
+        }
+
+        // Fetch states
+        Set<State> states = new HashSet<>();
+        for (UUID stateId : dto.getStateList()) {
+            stateOptionRepository.findById(stateId).ifPresent(states::add);
+        }
+
+        optionalDance.setName(dto.getName());
+        optionalDance.setGenre_list(genres);
+        optionalDance.setState_list(states);
+
+        return danceMapper.toDanceOutDto(danceRepository.save(optionalDance));
+    }
+
     public DanceOutDto createDance(DanceInDto dto) {
 
-        Dance createdDance = danceRepository.save(danceMapper.toDanceEntity(dto));
-        return danceMapper.toDanceOutDto(createdDance);
+        // Fetch genres
+        Set<Genre> genres = new HashSet<>();
+        for (UUID genreId : dto.getGenreList()) {
+            genreOptionRepository.findById(genreId).ifPresent(genres::add);
+        }
+
+        // Fetch states
+        Set<State> states = new HashSet<>();
+        for (UUID stateId : dto.getStateList()) {
+            stateOptionRepository.findById(stateId).ifPresent(states::add);
+        }
+
+        Dance dance = Dance.builder()
+                        .name(dto.getName())
+                        .genre_list(genres)
+                        .state_list(states)
+                        .build();
+
+        return danceMapper.toDanceOutDto(danceRepository.save(dance));
     }
 
     /** OPTIONS */

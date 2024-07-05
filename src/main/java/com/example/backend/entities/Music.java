@@ -1,5 +1,6 @@
 package com.example.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +25,6 @@ public class Music {
     private String name;
 
     @ManyToMany(mappedBy = "music_list", fetch = FetchType.LAZY)
+    @JsonBackReference
     private Set<Dance> dances;
 }

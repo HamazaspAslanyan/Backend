@@ -1,12 +1,15 @@
 package com.example.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "dance")
@@ -33,6 +36,7 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "genre_id", referencedColumnName = "id")
             })
+    @JsonManagedReference
     private Set<Genre> genre_list;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -43,6 +47,7 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "state_id", referencedColumnName = "id")
             })
+    @JsonManagedReference
     private Set<State> state_list;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -53,6 +58,30 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "music_id", referencedColumnName = "id")
             })
+    @JsonManagedReference
     private Set<Music> music_list;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dance dance = (Dance) o;
+        return Objects.equals(id, dance.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Dance{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                // Avoid recursive call to Genre's toString
+                ", genres=" + (genre_list != null ? genre_list.stream().map(genre -> genre.getId()).collect(Collectors.toSet()) : null) +
+                '}';
+    }
 
 }
