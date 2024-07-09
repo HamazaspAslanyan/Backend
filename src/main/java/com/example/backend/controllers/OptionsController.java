@@ -23,10 +23,10 @@ public class OptionsController {
     private final GenreOptionService genreOptionService;
     private final StateOptionService stateOptionService;
 
-    @GetMapping("/dances_options")
-    public ResponseEntity<List<DanceOptionDto>> allDanceOptions(){
-        return ResponseEntity.ok(danceService.allOptions());
-    }
+//    @GetMapping("/dances_options")
+//    public ResponseEntity<List<DanceOptionDto>> allDanceOptions(){
+//        return ResponseEntity.ok(danceService.allOptions());
+//    }
 
     @GetMapping("/genres")
     public ResponseEntity<List<GenreOptionDto>> allGenreOptions(){

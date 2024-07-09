@@ -26,6 +26,18 @@ public class Dance {
     @Column(name = "id")
     private UUID id;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_translation_id", referencedColumnName = "id")
+    private Translation name;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "description_translation_id", referencedColumnName = "id")
+    private Translation description;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "description_extra_translation_id", referencedColumnName = "id")
+    private Translation descriptionExtra;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "DANCE_GENRE",
             joinColumns = {
@@ -34,7 +46,7 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "genre_id", referencedColumnName = "id")
             })
-    @JsonManagedReference
+    @JsonManagedReference("genreRef")
     private Set<Genre> genre_list;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -45,7 +57,7 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "state_id", referencedColumnName = "id")
             })
-    @JsonManagedReference
+    @JsonManagedReference("stateRef")
     private Set<State> state_list;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -56,12 +68,9 @@ public class Dance {
             inverseJoinColumns = {
                     @JoinColumn(name = "music_id", referencedColumnName = "id")
             })
-    @JsonManagedReference
+    @JsonManagedReference("musicRef")
     private Set<Music> music_list;
 
-
-    @OneToMany(mappedBy = "dance", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DanceTranslation> translations;
 
     @Override
     public boolean equals(Object o) {
@@ -76,12 +85,13 @@ public class Dance {
         return Objects.hash(id);
     }
 
-
-
     @Override
     public String toString() {
         return "Dance{" +
                 "id=" + id +
+                ", name=" + (name != null ? name.getId() : null) +
+                ", description=" + (description != null ? description.getId() : null) +
+                ", descriptionExtra=" + (descriptionExtra != null ? descriptionExtra.getId() : null) +
                 ", genre_list=" + (genre_list != null ? genre_list.stream().map(Genre::getId).collect(Collectors.toSet()) : null) +
                 ", state_list=" + (state_list != null ? state_list.stream().map(State::getId).collect(Collectors.toSet()) : null) +
                 ", music_list=" + (music_list != null ? music_list.stream().map(Music::getId).collect(Collectors.toSet()) : null) +

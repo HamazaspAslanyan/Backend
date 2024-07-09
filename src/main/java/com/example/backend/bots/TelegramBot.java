@@ -161,7 +161,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (audioList.size() > 1) {
             sendMessage(telegramUtil.getMediaGroup(chatId, audioList));
         }else if (!audioList.isEmpty()){
-            sendMessage(telegramUtil.getAudio(chatId, danceOutDto.getName(), audioList.get(0)));
+//            sendMessage(telegramUtil.getAudio(chatId, danceOutDto.getName(), audioList.get(0)));
         }
     }
 
@@ -173,17 +173,17 @@ public class TelegramBot extends TelegramLongPollingBot {
         String command = messageText.split(" ")[0];
         long chatId = update.getMessage().getChatId();
 
-        List<DanceOutDto> similarDances = danceService.searchDance(messageText);
-
-        if (similarDances != null && !similarDances.isEmpty()){
-
-            List<TelegramButton> buttons = telegramMapper.toDanceButtons(similarDances);
-            deleteLastMessage(update);
-            sendMessage(telegramUtil.getButtons(chatId, "«" + messageText + "» որոնման արդյունքը", buttons));
-
-        }else {
-            sendMessage(new SendMessage(String.valueOf(chatId), "Ներողություն, այս պահին «" + messageText + "» անունով պար չեմ կարողանում գտնել"));
-        }
+//        List<DanceOutDto> similarDances = danceService.searchDance(messageText);
+//
+//        if (similarDances != null && !similarDances.isEmpty()){
+//
+//            List<TelegramButton> buttons = telegramMapper.toDanceButtons(similarDances);
+//            deleteLastMessage(update);
+//            sendMessage(telegramUtil.getButtons(chatId, "«" + messageText + "» որոնման արդյունքը", buttons));
+//
+//        }else {
+//            sendMessage(new SendMessage(String.valueOf(chatId), "Ներողություն, այս պահին «" + messageText + "» անունով պար չեմ կարողանում գտնել"));
+//        }
     }
 }
 

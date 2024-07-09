@@ -40,17 +40,17 @@ public class TelegramMapper {
 
         List<TelegramButton> buttons = new ArrayList<>();
 
-        for (DanceOutDto dance : dances){
-            String text = dance.getName();
-//            if(dance.getDescription() != null){
-//                text += "\uD83D\uDCC4";
-//            }
-//            if(dance.getMusicList() != null){
-//                text += "\uD83C\uDFA7";
-//            }
-            String callBack = "dance_" + dance.getId();
-            buttons.add(new TelegramButton(text, callBack));
-        }
+//        for (DanceOutDto dance : dances){
+//            String text = dance.getName();
+////            if(dance.getDescription() != null){
+////                text += "\uD83D\uDCC4";
+////            }
+////            if(dance.getMusicList() != null){
+////                text += "\uD83C\uDFA7";
+////            }
+//            String callBack = "dance_" + dance.getId();
+//            buttons.add(new TelegramButton(text, callBack));
+//        }
 
         buttons.sort(new ArmenianLanguageComparatorTelegramButtons<>());
 

@@ -1,7 +1,7 @@
 package com.example.backend.dtos.in;
 
+import com.example.backend.entities.Translation;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -16,13 +16,10 @@ import java.util.UUID;
 public class DanceInDto {
     @Id
     private UUID id;
-    private String name;
-    private String description_extra;
-    private String description;
+    private Translation name;
+    private Translation description;
+    private Translation descriptionExtra;
     private List<UUID> genreList;
     private List<UUID> stateList;
-    private List<UUID> musicList;
-    private List<UUID> videoList;
-    private List<UUID> lessonList;
 
 }
