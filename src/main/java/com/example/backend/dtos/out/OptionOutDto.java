@@ -1,5 +1,6 @@
-package com.example.backend.dtos.options;
+package com.example.backend.dtos.out;
 
+import com.example.backend.entities.Translation;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -12,10 +13,10 @@ import java.util.UUID;
 @Data
 @Getter
 @Setter
-public class StateOptionDto {
+public class OptionOutDto {
     @Id
     private UUID id;
     @NotNull
-    private String name;
+    private Translation name;
 
 }

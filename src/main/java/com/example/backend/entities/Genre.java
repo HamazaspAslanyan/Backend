@@ -25,7 +25,9 @@ public class Genre {
     @Column(name = "id")
     private UUID id;
 
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name", referencedColumnName = "id")
+    private Translation name;
 
     @ManyToMany(mappedBy = "genre_list", fetch = FetchType.LAZY)
     @JsonBackReference

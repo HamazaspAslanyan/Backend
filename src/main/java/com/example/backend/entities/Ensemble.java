@@ -23,15 +23,29 @@ public class Ensemble {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
-    private String name;
-    private String nameOriginal;
-    private String description;
-    private String address;
-    private String number;
-    private String email;
-    private String website;
+
     private String photoUrl;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_translation_id", referencedColumnName = "id")
+    private Translation name;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_long_translation_id", referencedColumnName = "id")
+    private Translation nameLong;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "description_translation_id", referencedColumnName = "id")
+    private Translation description;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_translation_id", referencedColumnName = "id")
+    private Address address;
+
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_translation_id", referencedColumnName = "id")
+    private Contact contact;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "ENSEMBLE_MUSIC",
@@ -62,14 +76,6 @@ public class Ensemble {
     public String toString() {
         return "Ensemble{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", nameOriginal='" + nameOriginal + '\'' +
-                ", description='" + description + '\'' +
-                ", number='" + number + '\'' +
-                ", email='" + email + '\'' +
-                ", website='" + website + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", music_list=" + (music_list != null ? music_list.stream().map(Music::getId).collect(Collectors.toSet()) : null) +
                 '}';
     }
 

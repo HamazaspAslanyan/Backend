@@ -1,14 +1,12 @@
 package com.example.backend.mappers;
 
 import com.example.backend.comparators.ArmenianLanguageComparatorTelegramButtons;
-import com.example.backend.dtos.out.DanceOutDto;
+import com.example.backend.dtos.OptionDto;
 import com.example.backend.dtos.telegram.TelegramButton;
 import com.example.backend.dtos.telegram.TelegramFile;
 import com.example.backend.entities.Music;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,21 +34,21 @@ public class TelegramMapper {
 //
 //        return buttons;
 //    }
-    public List<TelegramButton> toDanceButtons(List<DanceOutDto> dances){
+    public List<TelegramButton> toDanceButtons(List<OptionDto> dances){
 
         List<TelegramButton> buttons = new ArrayList<>();
 
-//        for (DanceOutDto dance : dances){
-//            String text = dance.getName();
-////            if(dance.getDescription() != null){
-////                text += "\uD83D\uDCC4";
-////            }
-////            if(dance.getMusicList() != null){
-////                text += "\uD83C\uDFA7";
-////            }
-//            String callBack = "dance_" + dance.getId();
-//            buttons.add(new TelegramButton(text, callBack));
-//        }
+        for (OptionDto dance : dances){
+            String text = dance.getName();
+//            if(dance.getDescription() != null){
+//                text += "\uD83D\uDCC4";
+//            }
+//            if(dance.getMusicList() != null){
+//                text += "\uD83C\uDFA7";
+//            }
+            String callBack = "dance_" + dance.getId();
+            buttons.add(new TelegramButton(text, callBack));
+        }
 
         buttons.sort(new ArmenianLanguageComparatorTelegramButtons<>());
 
@@ -67,7 +65,7 @@ public class TelegramMapper {
             for(Music music : musicList) {
                 TelegramFile file = new TelegramFile();
                 // Քաշելուց հետո երգի անուն
-                file.setName(music.getName());
+                file.setName(music.getName().getAm());
                 file.setTitle("mama");
                 file.setPath(fullPath);
                 //Երգի կողքին երևացող անուն

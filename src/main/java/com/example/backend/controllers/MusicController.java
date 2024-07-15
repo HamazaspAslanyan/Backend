@@ -37,5 +37,4 @@ public class MusicController {
         MusicOutDto createdMusic = service.create(dto);
         return ResponseEntity.created(URI.create("/music/" + createdMusic.getId())).body(createdMusic);
     }
-
 }

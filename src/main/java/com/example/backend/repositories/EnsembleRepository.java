@@ -13,5 +13,7 @@ public interface EnsembleRepository extends JpaRepository<Genre, UUID> {
     @Query(value = "SELECT * FROM ensemble", nativeQuery = true)
     List<Ensemble> getEnsembles();
 
+
+
 }
 

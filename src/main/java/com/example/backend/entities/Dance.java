@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -37,6 +38,9 @@ public class Dance {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "description_extra_translation_id", referencedColumnName = "id")
     private Translation descriptionExtra;
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Date createdAt;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "DANCE_GENRE",

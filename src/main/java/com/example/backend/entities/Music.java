@@ -1,9 +1,11 @@
 package com.example.backend.entities;
 
+import com.example.backend.constant.MusicType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -24,7 +26,10 @@ public class Music {
     @Column(name = "id")
     private UUID id;
 
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_translation_id", referencedColumnName = "id")
+    private Translation name;
+
     private String path;
     private String rating;
 
@@ -35,6 +40,11 @@ public class Music {
     @ManyToMany(mappedBy = "music_list", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Ensemble> ensembles;
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Date createdAt;
+
+    private Enum<MusicType> type;
 
 
     @Override

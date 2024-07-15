@@ -21,7 +21,9 @@ public class Video {
     @Column(name = "id")
     private UUID id;
 
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "name_translation_id", referencedColumnName = "id")
+    private Translation name;
 
 //    @ManyToMany(mappedBy = "videos")
 //    private Set<Dance> dances;

@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
+import com.example.backend.dtos.OptionDto;
 import com.example.backend.dtos.in.DanceInDto;
-import com.example.backend.dtos.out.DanceNameOutDto;
 import com.example.backend.dtos.out.DanceOutDto;
 import com.example.backend.services.DanceService;
 import jakarta.validation.Valid;
@@ -22,9 +22,10 @@ public class DanceController {
     public ResponseEntity<List<DanceOutDto>> allDances(){
         return ResponseEntity.ok(danceService.allDances());
     }
+
     @GetMapping("/dances/name_list")
-    public ResponseEntity<List<DanceNameOutDto>> getDanceNameList(){
-        return ResponseEntity.ok(danceService.getDanceNameList());
+    public ResponseEntity<List<OptionDto>> getDanceNameList(){
+        return ResponseEntity.ok(danceService.getDanceNameListAm());
     }
 
     @GetMapping("/dances/{id}")

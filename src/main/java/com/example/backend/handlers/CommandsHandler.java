@@ -38,7 +38,7 @@ public class CommandsHandler {
     }
 
     public SendMessage sendDanceList(Update update) {
-        List<TelegramButton> buttons = telegramMapper.toDanceButtons(danceService.allDances());
+        List<TelegramButton> buttons = telegramMapper.toDanceButtons(danceService.getDanceNameListAm());
         return telegramUtil.getButtons(update.getMessage().getChatId(), "Պարեղանակներ", buttons);
     }
     public SendMessage sendEventsList(Update update) {

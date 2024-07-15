@@ -1,5 +1,6 @@
 package com.example.backend.dtos.in;
 
+import com.example.backend.entities.Translation;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -15,7 +16,8 @@ import java.util.UUID;
 public class MusicInDto {
     @Id
     private UUID id;
-    private String name;
+
+    private Translation name;
     private String rating;
     private String path;
     private List<UUID> danceList;

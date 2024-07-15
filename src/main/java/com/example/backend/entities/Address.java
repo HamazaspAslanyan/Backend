@@ -1,7 +1,6 @@
 package com.example.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,14 +10,14 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "state")
+@Table(name = "dance")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 @Getter
 @Setter
-public class State {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,18 +28,12 @@ public class State {
     @JoinColumn(name = "name_translation_id", referencedColumnName = "id")
     private Translation name;
 
-    @ManyToMany(mappedBy = "state_list", fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JsonIgnore
-    private Set<Dance> dances;
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        State state = (State) o;
-        return Objects.equals(id, state.id);
+        Address dance = (Address) o;
+        return Objects.equals(id, dance.id);
     }
 
     @Override
@@ -50,11 +43,9 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
+        return "Dance{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                // Avoid recursive call to Dance's toString
-                ", dances=" + (dances != null ? dances.stream().map(dance -> dance.getId()).collect(Collectors.toSet()) : null) +
                 '}';
     }
+
 }

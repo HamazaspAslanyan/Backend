@@ -1,6 +1,8 @@
 package com.example.backend.services;
 
-import com.example.backend.dtos.options.GenreOptionDto;
+import com.example.backend.dtos.OptionDto;
+import com.example.backend.dtos.in.OptionInDto;
+import com.example.backend.dtos.out.OptionOutDto;
 import com.example.backend.entities.Genre;
 import com.example.backend.exceptions.AppException;
 import com.example.backend.mappers.GenreOptionMapper;
@@ -19,41 +21,35 @@ public class GenreOptionService {
     private final GenreOptionRepository genreOptionRepository;
     private final GenreOptionMapper genreOptionMapper;
 
-    public List<GenreOptionDto> allOptions(){
-        List <Genre> all = genreOptionRepository.getGenres();
-        return genreOptionMapper.toGenreDtoList(all);
+    public List<OptionOutDto> allOptions(){
+        List <Genre> all = genreOptionRepository.findAll();
+        return genreOptionMapper.toDtoList(all);
     }
 
-    public GenreOptionDto getOption(UUID id) {
-        Genre genre = genreOptionRepository.findById(id)
+    public OptionOutDto getOption(UUID id) {
+        Genre entity = genreOptionRepository.findById(id)
                 .orElseThrow(() -> new AppException("Genre not found", HttpStatus.NOT_FOUND));
 
-        return genreOptionMapper.toGenreDto(genre);
+        return genreOptionMapper.toDto(entity);
     }
 
-    public GenreOptionDto createOption(GenreOptionDto optionDto) {
-        Genre genre = genreOptionMapper.toGenre(optionDto);
-        Genre createdGenre = genreOptionRepository.save(genre);
-        return genreOptionMapper.toGenreDto(createdGenre);
+    public OptionOutDto createOption(OptionInDto optionDto) {
+        return genreOptionMapper.toDto(genreOptionRepository.save(genreOptionMapper.toEntity(optionDto)));
     }
 
-    public GenreOptionDto updateOption(UUID id, GenreOptionDto optionDto) {
-        Genre genre = genreOptionRepository.findById(id)
-                .orElseThrow(() -> new AppException("Genre not found", HttpStatus.NOT_FOUND));
-
-        Genre updatedGenre = genreOptionRepository.save(genre);
-
-        return genreOptionMapper.toGenreDto(updatedGenre);
+    public OptionOutDto updateOption(UUID id, OptionInDto optionDto) {
+//        Genre entity = genreOptionRepository.findById(id)
+//                .orElseThrow(() -> new AppException("Genre not found", HttpStatus.NOT_FOUND));
+//        entity.getName().setAm("aaaaaaa");
+        return genreOptionMapper.toDto(genreOptionRepository.save(genreOptionMapper.toEntity(optionDto)));
     }
 
-    public GenreOptionDto deleteOption(UUID id) {
-        Genre genre = genreOptionRepository.findById(id)
+    public OptionOutDto deleteOption(UUID id) {
+        Genre entity = genreOptionRepository.findById(id)
                 .orElseThrow(() -> new AppException("Genre not found", HttpStatus.NOT_FOUND));
 
         genreOptionRepository.deleteById(id);
-
-        return  genreOptionMapper.toGenreDto(genre);
-
+        return  genreOptionMapper.toDto(entity);
     }
 }
 
