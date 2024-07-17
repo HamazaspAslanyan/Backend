@@ -44,12 +44,12 @@ public class OptionsController {
         return ResponseEntity.created(URI.create("/genre/" + createdOption.getId())).body(createdOption);
     }
 
-    @DeleteMapping("/genres/{id}")
+    @DeleteMapping("/genre/{id}")
     public ResponseEntity<OptionOutDto> deleteGenreOption(@PathVariable UUID id) {
         return ResponseEntity.ok(genreOptionService.deleteOption(id));
     }
 
-    @PutMapping("/genres/{id}")
+    @PutMapping("/genre/{id}")
     public ResponseEntity<OptionOutDto> updateGenreOption(@PathVariable UUID id, @Valid @RequestBody OptionInDto optionDto) {
         return ResponseEntity.ok(genreOptionService.updateOption(id, optionDto));
     }

@@ -1,5 +1,6 @@
 package com.example.backend.entities;
 
+import com.example.backend.constant.DanceType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -39,9 +40,6 @@ public class Dance {
     @JoinColumn(name = "description_extra_translation_id", referencedColumnName = "id")
     private Translation descriptionExtra;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Date createdAt;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "DANCE_GENRE",
             joinColumns = {
@@ -74,6 +72,24 @@ public class Dance {
             })
     @JsonManagedReference("musicRef")
     private Set<Music> music_list;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "DANCE_VIDEO",
+            joinColumns = {
+                    @JoinColumn(name = "dance_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "video_id", referencedColumnName = "id")
+            })
+    @JsonManagedReference("videoRef")
+    private Set<Video> video_list;
+
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Date createdAt;
+    private Date modifiedAt;
+
+    private Enum<DanceType> type;
 
 
     @Override

@@ -2,6 +2,7 @@ package com.example.backend.entities;
 
 import com.example.backend.constant.MusicType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,18 +32,27 @@ public class Music {
     private Translation name;
 
     private String path;
-    private String rating;
+    private Integer rating;
 
     @ManyToMany(mappedBy = "music_list", fetch = FetchType.LAZY)
     @JsonBackReference
-    private Set<Dance> dances;
+    private Set<Dance> danceList;
 
-    @ManyToMany(mappedBy = "music_list", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private Set<Ensemble> ensembles;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "MUSIC_ENSEMBLE",
+            joinColumns = {
+                    @JoinColumn(name = "music_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ensemble_id", referencedColumnName = "id")
+            })
+    @JsonManagedReference("ensembleRef")
+    private Set<Ensemble> ensemble_list;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Date createdAt;
+    private Date modifiedAt;
 
     private Enum<MusicType> type;
 
@@ -64,9 +74,6 @@ public class Music {
     public String toString() {
         return "Music{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                // Avoid recursive call to Dance's toString
-                ", dances=" + (dances != null ? dances.stream().map(dance -> dance.getId()).collect(Collectors.toSet()) : null) +
                 '}';
     }
 }

@@ -52,7 +52,7 @@ public class MusicService {
         entity.setRating(dto.getRating());
 
         if (dto.getDanceList() != null) {
-            Set<Dance> currentDances = entity.getDances();
+            Set<Dance> currentDances = entity.getDanceList();
             Set<Dance> newDances = new HashSet<>();
 
             for (UUID danceId : dto.getDanceList()) {
@@ -77,13 +77,13 @@ public class MusicService {
                 }
             }
 
-            entity.setDances(newDances);
+            entity.setDanceList(newDances);
         } else {
             // Clear all dances if dto.getDanceList() is null
-            for (Dance dance : entity.getDances()) {
+            for (Dance dance : entity.getDanceList()) {
                 dance.getMusic_list().remove(entity);
             }
-            entity.setDances(Collections.emptySet());
+            entity.setDanceList(Collections.emptySet());
         }
 
         return mapper.toOutDto(repository.save(entity));
@@ -109,7 +109,7 @@ public class MusicService {
                 dances.add(dance);
                 dance.getMusic_list().add(entity); // Add the music entity to the dance
             }
-            entity.setDances(dances);
+            entity.setDanceList(dances);
         }
 
         return mapper.toOutDto(repository.save(entity));

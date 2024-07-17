@@ -18,7 +18,7 @@ public class MusicInDto {
     private UUID id;
 
     private Translation name;
-    private String rating;
+    private Integer rating;
     private String path;
     private List<UUID> danceList;
     private List<UUID> ensambleList;

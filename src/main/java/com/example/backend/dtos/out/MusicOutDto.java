@@ -21,7 +21,7 @@ public class MusicOutDto {
     private UUID id;
     private String name;
     private String path;
-    private String rating;
+    private Integer rating;
 
 //    private Set<Dance> dances;
 

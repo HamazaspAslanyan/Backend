@@ -1,5 +1,7 @@
 package com.example.backend.entities;
 
+import com.example.backend.constant.MusicType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,21 +44,23 @@ public class Ensemble {
     @JoinColumn(name = "address_translation_id", referencedColumnName = "id")
     private Address address;
 
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_translation_id", referencedColumnName = "id")
     private Contact contact;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ENSEMBLE_MUSIC",
-            joinColumns = {
-                    @JoinColumn(name = "ensemble_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "music_id", referencedColumnName = "id")
-            })
-    @JsonManagedReference
-    private Set<Music> music_list;
+    @ManyToMany(mappedBy = "ensemble_list", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Music> musicList;
+
+    @ManyToMany(mappedBy = "ensemble_list", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Video> videoList;
+
+    @ManyToMany(mappedBy = "ensemble_list", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Event> eventList;
+
+    private Enum<MusicType> musicType;
 
     @Override
     public int hashCode() {
