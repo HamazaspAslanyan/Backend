@@ -58,7 +58,7 @@ public class DanceService {
     public List<OptionDto> getDanceNameListAm() {
 
 
-        return optionMapper.toOutDtoList(optionRepository.getNameListAm());
+        return optionMapper.toOutDtoList(optionRepository.getDanceNameListAm());
     }
 
 

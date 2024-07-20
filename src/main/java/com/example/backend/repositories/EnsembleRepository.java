@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.UUID;
 
-public interface EnsembleRepository extends JpaRepository<Genre, UUID> {
+public interface EnsembleRepository extends JpaRepository<Ensemble, UUID> {
 
     @Query(value = "SELECT * FROM ensemble", nativeQuery = true)
     List<Ensemble> getEnsembles();

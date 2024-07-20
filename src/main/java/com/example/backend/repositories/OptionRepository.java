@@ -15,8 +15,11 @@ public interface OptionRepository extends JpaRepository<Option, UUID> {
     FROM dance d
     JOIN translation t ON d.name_translation_id = t.id */
     @Query(value = "SELECT d.id, d.name FROM dance_name_am d", nativeQuery = true)
-    List<Option> getNameListAm();
+    List<Option> getDanceNameListAm();
 
+//TODO view for video obj(id, name)
+    @Query(value = "SELECT d.id, d.name FROM dance_name_am d", nativeQuery = true)
+    List<Option> getVideoNameListAm();
 
 }
 

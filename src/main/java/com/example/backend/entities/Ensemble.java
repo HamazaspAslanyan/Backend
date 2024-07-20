@@ -2,14 +2,12 @@ package com.example.backend.entities;
 
 import com.example.backend.constant.MusicType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "ensemble")
@@ -52,7 +50,7 @@ public class Ensemble {
     @JsonBackReference
     private Set<Music> musicList;
 
-    @ManyToMany(mappedBy = "ensemble_list", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "ensembleList", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Video> videoList;
 
